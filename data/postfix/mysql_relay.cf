@@ -1,0 +1,5 @@
+hosts = mysql
+user = root
+password = secretpassword
+dbname = mail
+query = SELECT domain FROM domain WHERE domain='%s' and backupmx = 1

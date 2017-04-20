@@ -1,0 +1,79 @@
+version: "2"
+
+services:
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=secretpassword"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/prepare_db.sh:/usr/local/bin/prepare_db.sh
+  postfix:
+    build:
+      context: ./imgs/postfix
+    restart: always
+    ports:
+      - 587:587
+    depends_on:
+      - spamassassin
+      - mysql
+    volumes:
+      - ./data/cert:/cert
+      - ./data/mail:/home/vmail
+      - ./data/postfix/main.cf:/etc/postfix/main.cf
+      - ./data/postfix/master.cf:/etc/postfix/master.cf
+      - ./data/postfix/mysql_relay.cf:/etc/postfix/mysql_relay.cf
+      - ./data/postfix/mysql-virtual-alias-map.cf:/etc/postfix/mysql-virtual-alias-map.cf
+      - ./data/postfix/mysql-virtual-mailbox-map.cf:/etc/postfix/mysql-virtual-mailbox-map.cf
+      - ./data/postfix/mysql-virtual-mailbox-domains.cf:/etc/postfix/mysql-virtual-mailbox-domains.cf
+      - ./data/postfix/mysql-virtual-email2email.cf:/etc/postfix/mysql-virtual-email2email.cf
+  dovecot:
+    build:
+      context: ./imgs/dovecot
+    restart: always
+    ports:
+      - 993:993
+    depends_on:
+      - spamassassin
+      - mysql
+    volumes:
+      - ./data/cert:/cert
+      - ./data/mail:/home/vmail
+      - ./data/dovecot/10-master.conf:/etc/dovecot/conf.d/10-master.conf
+      - ./data/dovecot/10-ssl.conf:/etc/dovecot/conf.d/10-ssl.conf
+      - ./data/dovecot/sql.conf:/etc/dovecot/dovecot-sql.conf.ext
+  spamassassin:
+    build:
+      context: ./imgs/spamassassin
+    restart: always
+  php:
+    build:
+      context: ./imgs/php
+    restart: always
+    volumes:
+      - ./data/postadmin:/var/www/html
+      - ./data/config.inc.php:/var/www/html/config.inc.php
+    depends_on:
+      - mysql
+  nginx:
+    image: nginx
+    restart: always
+    volumes:
+      - ./data/postadmin:/var/www/html
+      - ./data/config.inc.php:/var/www/html/config.inc.php
+      - ./data/nginx.conf:/etc/nginx/nginx.conf
+      - ./data/dhparams.pem:/etc/nginx/dhparams.pem
+      - ./data/cert:/cert
+      - ./data/known:/known
+    depends_on:
+      - php
+  certbot:
+    build:
+      context: ./imgs/php
+    restart: always
+    volumes:
+      - ./data/cert:/etc/letsencrypt
+      - ./data/known:/known
+    depends_on:
+      - nginx
