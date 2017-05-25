@@ -1,4 +1,4 @@
-FROM ronmi/ynit-image
+FROM ronmi/ynit-image:stretch
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
