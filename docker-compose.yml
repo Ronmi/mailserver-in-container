@@ -21,6 +21,7 @@ services:
     volumes:
       - ./data/cert:/cert
       - ./data/mail:/home/vmail
+      - ./data/postfix:/var/spool/postfix
   dovecot:
     build:
       context: ./imgs/dovecot
@@ -53,7 +54,6 @@ services:
       - ./data/postadmin:/var/www/html
       - ./data/config.inc.php:/var/www/html/config.inc.php
       - ./data/nginx.conf:/etc/nginx/nginx.conf
-      - ./data/dhparams.pem:/etc/nginx/dhparams.pem
       - ./data/cert:/cert
       - ./data/known:/known
     ports:

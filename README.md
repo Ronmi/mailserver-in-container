@@ -23,9 +23,6 @@ You'll have to get `docker` and `docker-compose` installed first.
 ### Prepare environment
 
 ```sh
-# generate required file for nginx SSL
-$ openssl dhparam -out data/dhparams.pem 2048
-
 # grab newest phppostadmin code
 #     with wget
 $ wget -q -O - https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
