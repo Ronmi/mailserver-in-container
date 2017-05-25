@@ -75,5 +75,3 @@ services:
     volumes:
       - ./data/cert:/etc/letsencrypt
       - ./data/known:/known
-    depends_on:
-      - nginx
