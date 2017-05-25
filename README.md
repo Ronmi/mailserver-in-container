@@ -34,6 +34,9 @@ $ docker-compose up -d mysql
 # wait a moment, let mysql work
 # create necessary database structure
 $ docker-compose exec mysql prepare_db.sh
+
+# update maildir owner
+$ sudo chown -R 5000:5000 data/mail
 ```
 
 ### Copy you SSL certificate/key
