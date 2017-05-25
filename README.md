@@ -51,6 +51,7 @@ or
 ### Obtain one using certbot
 
 ```sh
+# If in doubt, visit letsencrypt.org for detailed usage
 $ docker-compose run certbot certbot certonly --manual --cert-name mail
 # make symlink for nginx/postfix/dovecot
 $ cd data
@@ -71,7 +72,11 @@ For security consideration, port of nginx is not exported by default. You have t
 1. Lookup the ip address of nginx container `docker-compose exec nginx ip addr`
 2. Find your way to reach that ip, ssh port-forwarding for example
 3. Open `setup.php` in browser, say, `http://127.0.0.1:8000/setup.php` if forwarded to localhost:8000 via ssh
-4. Open `index.php` and configure your mailboxes
+4. Follow the instruction to
+   a. Setup a **setup password**
+   b. Modify `data/config.inc.php` for your setup password
+   c. Create an administrator account
+5. Open `index.php` and configure your mailboxes
 
 ### Ready to use
 

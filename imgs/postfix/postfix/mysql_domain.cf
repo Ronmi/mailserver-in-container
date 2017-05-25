@@ -2,4 +2,4 @@ user = root
 password = secretpassword
 hosts = mysql
 dbname = mail
-query = SELECT 1 FROM virtual_domains WHERE name='%s'
+query = SELECT 1 FROM domain WHERE domain='%s' AND active=1

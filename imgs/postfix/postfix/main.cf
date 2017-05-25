@@ -39,10 +39,9 @@ virtual_uid_maps = static:5000
 virtual_gid_maps = static:5000
 virtual_mailbox_base = /home/vmail
 #Virtual domains, users, and aliases
-virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
-virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
-virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf,
-        mysql:/etc/postfix/mysql-virtual-email2email.cf
+virtual_mailbox_domains = mysql:/etc/postfix/mysql_domain.cf
+virtual_mailbox_maps = mysql:/etc/postfix/mysql_mailbox.cf
+virtual_alias_maps = mysql:/etc/postfix/mysql_alias.cf
 virtual_transport = lmtp:inet:dovecot:9000
 local_transport = lmtp:inet:dovecot:9000
 relay_domains = mysql:/etc/postfix/mysql_relay.cf
@@ -54,6 +53,6 @@ smtpd_recipient_restrictions =
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_security_options = noanonymous
 smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/auth
+smtpd_sasl_path = inet:dovecot:9001
 
 message_size_limit = 51200000

@@ -1,0 +1,5 @@
+user = root
+password = secretpassword
+hosts = mail
+dbname = mail
+query = SELECT goto FROM alias WHERE address='%s' AND active=1

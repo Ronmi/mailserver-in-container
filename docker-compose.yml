@@ -21,13 +21,6 @@ services:
     volumes:
       - ./data/cert:/cert
       - ./data/mail:/home/vmail
-      - ./data/postfix/main.cf:/etc/postfix/main.cf
-      - ./data/postfix/master.cf:/etc/postfix/master.cf
-      - ./data/postfix/mysql_relay.cf:/etc/postfix/mysql_relay.cf
-      - ./data/postfix/mysql-virtual-alias-map.cf:/etc/postfix/mysql-virtual-alias-map.cf
-      - ./data/postfix/mysql-virtual-mailbox-map.cf:/etc/postfix/mysql-virtual-mailbox-map.cf
-      - ./data/postfix/mysql-virtual-mailbox-domains.cf:/etc/postfix/mysql-virtual-mailbox-domains.cf
-      - ./data/postfix/mysql-virtual-email2email.cf:/etc/postfix/mysql-virtual-email2email.cf
   dovecot:
     build:
       context: ./imgs/dovecot
@@ -40,9 +33,6 @@ services:
     volumes:
       - ./data/cert:/cert
       - ./data/mail:/home/vmail
-      - ./data/dovecot/10-master.conf:/etc/dovecot/conf.d/10-master.conf
-      - ./data/dovecot/10-ssl.conf:/etc/dovecot/conf.d/10-ssl.conf
-      - ./data/dovecot/sql.conf:/etc/dovecot/dovecot-sql.conf.ext
   spamassassin:
     build:
       context: ./imgs/spamassassin

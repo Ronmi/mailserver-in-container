@@ -1,10 +1,11 @@
-smtp      inet  n       -       -       -       -       smtpd
+smtp      inet   n       -       -       -       -       smtpd
   -o content_filter=spamassassin
 #smtp      inet  n       -       -       -       1       postscreen
 #smtpd     pass  -       -       -       -       -       smtpd
 #dnsblog   unix  -       -       -       -       0       dnsblog
 #tlsproxy  unix  -       -       -       -       0       tlsproxy
-submission inet n       -       -       -       -       smtpd
+submission inet  n       -       -       -       -       smtpd
+  -o content_filter=spamassassin
   -o syslog_name=postfix/submission
   -o smtpd_tls_security_level=encrypt
   -o smtpd_sasl_auth_enable=yes
@@ -16,7 +17,8 @@ submission inet n       -       -       -       -       smtpd
   -o smtpd_recipient_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
   -o smtpd_relay_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
   -o milter_macro_daemon_name=ORIGINATING
-smtps     inet  n       -       -       -       -       smtpd
+smtps     inet   n       -       -       -       -       smtpd
+  -o content_filter=spamassassin
   -o syslog_name=postfix/smtps
   -o smtpd_tls_wrappermode=yes
   -o smtpd_sasl_auth_enable=yes

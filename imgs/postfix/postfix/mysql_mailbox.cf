@@ -1,0 +1,5 @@
+user = root
+password = secretpassword
+hosts = mysql
+dbname = mail
+query = SELECT 1 FROM mailbox WHERE username='%s' AND active=1

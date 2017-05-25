@@ -143,7 +143,7 @@ $CONF['smtp_client'] = '';
 //     - don't use dovecot:* methods that include the username in the hash - you won't be able to login to PostfixAdmin in this case
 //     - you'll need at least dovecot 2.1 for salted passwords ('doveadm pw' 2.0.x doesn't support the '-t' option)
 //     - dovecot 2.0.0 - 2.0.7 is not supported
-$CONF['encrypt'] = 'md5crypt';
+$CONF['encrypt'] = 'dovecot:CRAM-MD5';
 
 // In what flavor should courier-authlib style passwords be encrypted?
 // (only used if $CONF['encrypt'] == 'authlib')
