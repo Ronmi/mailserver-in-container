@@ -56,6 +56,8 @@ services:
       - ./data/dhparams.pem:/etc/nginx/dhparams.pem
       - ./data/cert:/cert
       - ./data/known:/known
+    ports:
+      - 20007:80
     depends_on:
       - php
   certbot:
