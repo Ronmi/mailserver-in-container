@@ -1,4 +1,4 @@
-Secure, *relatively* easy to setup public mail server.
+*Aim to be* secure, *relatively* easy to setup mail server.
 
 # Howto
 
@@ -87,6 +87,7 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
 
 ### Usage
 
+- You can use *WEBROOT* method to authenticate with certbot, `/known` is there for you. This is the method I prefer.
 - Wanna modify some settings? Use `docker cp` to make a copy at host side, and modify `docker-compose.yml` to mount it into container again.
 - Migrating these servers to another VPS service? Just stop the server and tar the whole folter to new VPS, then `docker-compose up -d` again.
 
@@ -95,3 +96,8 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
 - Edit `docker-compose.yml` and/or firewall rules, do not expose the postadmin ui to public.
 - If you have to expose it, https will always be a good idea.
 - I am not an expert at this domain. It would be nice if willing to provide better configuration options via issue.
+- Never forget applying security update. A simple command do the magic for you: `docker-compose pull && docker-compose build --pull && docker-compose up -d`
+
+# LICENSE
+
+MIT
