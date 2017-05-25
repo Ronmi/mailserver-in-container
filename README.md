@@ -50,8 +50,8 @@ or
 ```sh
 # If in doubt, visit letsencrypt.org for detailed usage
 $ docker-compose run certbot certbot certonly --manual --cert-name mail
-# make symlink for nginx/postfix/dovecot
-$ cd data
+# make symlink for nginx/postfix/dovecot (you might need root privilege)
+$ cd data/cert
 $ ln -s live/mail/fullchain.pem mail.pem
 $ ln -s live/mail/privkey.pem mail.key
 ```
