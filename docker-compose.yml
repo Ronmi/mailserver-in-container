@@ -51,7 +51,7 @@ services:
     volumes:
       - ./data/webmail:/var/www/html
       - ./data/postadmin:/var/www/html/_postadmin
-      - ./data/config.inc.php:/var/www/html/admin/config.inc.php
+      - ./data/config.inc.php:/var/www/html/_postadmin/config.inc.php
     depends_on:
       - mysql
   nginx:
@@ -60,7 +60,7 @@ services:
     volumes:
       - ./data/webmail:/var/www/html
       - ./data/postadmin:/var/www/html/_postadmin
-      - ./data/config.inc.php:/var/www/html/config.inc.php
+      - ./data/config.inc.php:/var/www/html/_postadmin/config.inc.php
       - ./data/nginx.conf:/etc/nginx/nginx.conf
       - ./data/cert:/cert
       - ./data/known:/known
