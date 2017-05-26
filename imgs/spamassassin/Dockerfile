@@ -9,7 +9,13 @@ RUN sed -i 's#OPTIONS="#OPTIONS="-A 0.0.0.0/0 -s /dev/stdout -l -i 0.0.0.0:9000 
  && sed -i 's/CRON=0/CRON=1/' /etc/default/spamassassin \
  && sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/spamassassin
 
+RUN addgroup --gid 5000 vmail \
+ && adduser --home /home/vmail --no-create-home --uid 5000 --gid 5000 \
+            --disabled-login --disabled-password --gecos ,,,,, \
+	    vmail
+
 ADD local.cf /etc/spamassassin/
+ADD prepare.sh /etc/ynit/
 
 RUN ln -sf /etc/init.d/cron /etc/init.d/spamassassin /etc/ynit
 
