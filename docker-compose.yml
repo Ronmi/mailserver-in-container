@@ -41,6 +41,8 @@ services:
     build:
       context: ./imgs/spamassassin
     restart: always
+    volumes:
+      - ./data/mail:/home/vmail
   php:
     build:
       context: ./imgs/php
