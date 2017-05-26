@@ -39,6 +39,8 @@ $ docker-compose exec mysql prepare_db.sh
 $ sudo chown -R 5000:5000 data/mail
 ```
 
+**Optional:**, you can install a php-based application (like webmail) in `data/webmail`
+
 ### Copy you SSL certificate/key
 
 ```sh
@@ -71,9 +73,9 @@ $ docker-compose up -d nginx php mysql
 
 1. Open `setup.php` in browser, say, `http://1.2.3.4:20007/setup.php`
 2. Follow the instruction to
-   a. Setup a **setup password**
-   b. Modify `data/config.inc.php` for your setup password
-   c. Create an administrator account
+   1. Setup a **setup password**
+   2. Modify `data/config.inc.php` for your setup password
+   3. Create an administrator account
 3. Open `index.php` and configure your mailboxes
 
 ### Bringing up whole service
