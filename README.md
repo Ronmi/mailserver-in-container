@@ -94,7 +94,7 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
 
 - You can use *WEBROOT* method to authenticate with Certbot, `/known` is there for you. This is the method I prefer.
 - Wanna modify some settings? Use `docker cp` to make a copy at host side, and modify `docker-compose.yml` to mount it into container again.
-- Migrating these servers to another VPS service? Just stop the server and tar the whole folter to new VPS, then `docker-compose up -d` again.
+- Migrating these servers to another VPS service? Just stop the server and tar the whole folder to new VPS, then `docker-compose up -d` again.
 
 ### Security
 
@@ -105,9 +105,9 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
 
 # TODO
 
-[] Add a job in cron.daily to run `sa-learn` with user-defined mail folder.
-[] Find a better way for PostfixAdmin installation.
-[] Add instructions for installing a webmail client, maybe RainLoop or Roundcube.
+- [ ] Add a job in cron.daily to run `sa-learn` with user-defined mail folder.
+- [ ] Find a better way for PostfixAdmin installation.
+- [ ] Add instructions for installing a webmail client, maybe RainLoop or Roundcube.
 
 # LICENSE
 
