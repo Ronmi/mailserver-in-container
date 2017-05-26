@@ -73,3 +73,4 @@ endif # Mail::SpamAssassin::Plugin::Shortcircuit
 
 bayes_path /var/lib/spamassassin/bayes.db
 bayes_file_mode 0777
+pyzor_options --homedir /var/lib/spamassassin/pyzor

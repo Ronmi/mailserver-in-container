@@ -1,7 +1,7 @@
 FROM ronmi/ynit-image
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends spamassassin cron \
+ && apt-get install -y spamassassin cron pyzor \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/*
  
