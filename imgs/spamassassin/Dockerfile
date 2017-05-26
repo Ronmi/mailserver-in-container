@@ -9,6 +9,8 @@ RUN sed -i 's#OPTIONS="#OPTIONS="-s /dev/stdout -l -i 0.0.0.0:9000 #' /etc/defau
  && sed -i 's/CRON=0/CRON=1/' /etc/default/spamassassin \
  && sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/spamassassin
 
+ADD local.cf /etc/spamassassin/
+
 RUN ln -sf /etc/init.d/cron /etc/init.d/spamassassin /etc/ynit
 
 CMD ["ynit", "-unix", "/dev/log"]
