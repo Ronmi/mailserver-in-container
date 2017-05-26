@@ -2,8 +2,6 @@ smtp      inet   n       -       -       -       -       smtpd
   -o content_filter=spamassassin
   -o syslog_name=postfix/smtp
   -o smtpd_reject_unlisted_recipient=no
-  -o smtpd_sender_restrictions=permit_sasl_authenticated,reject
-  -o smtpd_recipient_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
   -o smtpd_relay_restrictions=permit_auth_destination,reject
   -o milter_macro_daemon_name=ORIGINATING
 #smtp      inet  n       -       -       -       1       postscreen
