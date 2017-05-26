@@ -13,5 +13,6 @@ RUN addgroup --gid 5000 vmail \
 	    vmail
 
 ADD dovecot /etc/dovecot/
+RUN echo 'postmaster_address = root@localhost' | tee -a /etc/dovecot/dovecot.conf
  
 CMD ["ynit", "-unix", "/dev/log"]
