@@ -44,6 +44,13 @@ services:
     volumes:
       - ./data/spamassassin:/var/lib/spamassassin
       - ./data/mail:/home/vmail
+  fetchmail:
+    build:
+      context: ./imgs/fetchmail
+    restart: always
+    volumes:
+      - ./data/mail:/home/vmail
+      - ./data/postadmin:/var/www/html/_postadmin
   php:
     build:
       context: ./imgs/php
