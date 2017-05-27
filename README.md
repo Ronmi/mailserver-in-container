@@ -23,15 +23,6 @@ You'll have to get `docker` and `docker-compose` installed first.
 ### Prepare environment
 
 ```sh
-# grab newest PostfixAdmin code
-#     with wget
-$ wget -q -O - https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
-#     or curl
-$ curl -sSL https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
-
-# copy default config file for PostfixAdmin
-$ cp data/config.inc.php data/postadmin/
-
 # initialize database
 $ docker-compose up -d mysql
 # wait a moment, let MySQL work
@@ -55,20 +46,39 @@ or
 
 ### Obtain one using Certbot
 
+Below are steps using `WEBROOT` method. You can find more information about Certbot on internet.
+
+First, you should modify the `docker-compose.yml` for exposing NGINX at port 80, or set a reverse proxy in front of it.
+
+After that
+
 ```sh
 # If in doubt, visit letsencrypt.org for detailed usage
-$ docker-compose run certbot certbot certonly --manual --cert-name mail
+$ docker-compose run certbot certbot certonly --webroot /known -d mail.your.domain -d another_host.your.domain --cert-name mail
 # make symlink for Postfix/Dovecot (you might need root privilege)
 $ cd data/cert
 $ ln -s live/mail/fullchain.pem mail.pem
 $ ln -s live/mail/privkey.pem mail.key
 ```
 
-### Configure PostfixAdmin
+### Install PostfixAdmin
 
 By default, the web service is exported at port 20007 without SSL. **You should make some protections** (eg: add firewall rules) before configuring PostfixAdmin.
 
-First, bring up related services
+First grab newest PostfixAdmin codes
+
+```sh
+# grab newest PostfixAdmin code
+#     with wget
+$ wget -q -O - https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
+#     or curl
+$ curl -sSL https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
+
+# copy default config file for PostfixAdmin
+$ cp data/config.inc.php data/postadmin/
+```
+
+Bring up related services
 
 ```sh
 $ docker-compose up -d nginx php mysql
