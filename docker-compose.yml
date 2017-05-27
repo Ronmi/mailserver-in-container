@@ -24,8 +24,6 @@ services:
       - ./data/cert:/cert
       - ./data/mail:/home/vmail
       - ./data/postfix:/var/spool/postfix
-      - ./data/fetchmail.conf:/etc/mail/postfixadmin/fetchmail.conf
-      - ./data/postadmin:/var/www/html/_postadmin
   dovecot:
     build:
       context: ./imgs/dovecot
@@ -46,6 +44,13 @@ services:
     volumes:
       - ./data/spamassassin:/var/lib/spamassassin
       - ./data/mail:/home/vmail
+  fetchmail:
+    build:
+      context: ./imgs/fetchmail
+    restart: always
+    volumes:
+      - ./data/mail:/home/vmail
+      - ./data/fetchmail.conf:/etc/mail/postfixadmin/fetchmail.conf
   php:
     build:
       context: ./imgs/php
