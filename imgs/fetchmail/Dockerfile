@@ -1,7 +1,7 @@
 FROM ronmi/ynit-image
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends cron fetchmail \
+ && apt-get install -y --no-install-recommends cron fetchmail ca-certificates \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/*
  
