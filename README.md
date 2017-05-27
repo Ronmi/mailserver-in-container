@@ -30,7 +30,7 @@ $ wget -q -O - https://github.com/postfixadmin/postfixadmin/archive/master.tar.g
 $ curl -sSL https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
 
 # copy default config file for PostfixAdmin
-$ cp data/fetchmail.conf data/config.inc.php data/postadmin/
+$ cp data/config.inc.php data/postadmin/
 
 # initialize database
 $ docker-compose up -d mysql

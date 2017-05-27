@@ -49,6 +49,7 @@ services:
       context: ./imgs/fetchmail
     restart: always
     volumes:
+      - ./data/fetchmail.conf:/etc/mail/postfixadmin/fetchmail.conf
       - ./data/mail:/home/vmail
       - ./data/postadmin:/var/www/html/_postadmin
   php:
