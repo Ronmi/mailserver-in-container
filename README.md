@@ -1,8 +1,34 @@
 *Aim to be* secure, *relatively* easy to setup mail server.
 
+It is designed for personal or small business only.
+
+# What's inside
+
+- Postfix for sending mail, with SSL/STARTTLS support.
+- Dovecot for receiving mail, with SSL support.
+- SpamAssassin for spam detection, with global bayes filter.
+- Certbot to obtain free SSL certification, with auto-renewal.
+- PostfixAdmin for easier administrating.
+- Webmail-ready (PHP-based), install RainLoop/Roundcube/whatever you want in a jiffy.
+
+### Pros
+
+- **Relatively easy** to install: less than 15 mins with fast internet connection.
+- Easy to backup and migrate: just stop the whole service and `sudo tar` it. (need root privilege for preserving owner info)
+- Easy to configure: using PostfixAdmin to provide web-based administration.
+- Build on top of Debian: applying security updates only costs you one line of code; Better stability (comparing with Ubuntu)
+
+### Cons
+
+- Still needs lots learning to keep things running well (tuning configurations in particular)
+- A few tasks need to be manually executed.
+- Fat and furious; Higher risk about 0-day attack.
+
 # Howto
 
 ## Setup DNS records
+
+Since DNSSEC is required to send mail to many public mail services like Gmail, it is suggested not to host your own DNS unless you know what you are doing.
 
 You should add at least 3 `SRV` records and a `TXT` record:
 
