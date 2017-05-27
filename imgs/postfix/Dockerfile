@@ -1,5 +1,7 @@
 FROM ronmi/ynit-image
 
+RUN echo "postfix postfix/mailname string postfix" | debconf-set-selections \
+ && echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
         postfix-cdb postfix-mysql postfix-pcre postfix spamc \
