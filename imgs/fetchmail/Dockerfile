@@ -1,7 +1,10 @@
 FROM ronmi/ynit-image
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends cron fetchmail ca-certificates \
+ && apt-get install -y --no-install-recommends \
+        cron fetchmail ca-certificates \
+        libdbi-perl libmime-base64-perl libfile-temp-perl \
+	libsys-syslog-perl liblockfile-simple-perl \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/*
  
