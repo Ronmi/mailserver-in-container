@@ -29,6 +29,9 @@ $ wget -q -O - https://github.com/postfixadmin/postfixadmin/archive/master.tar.g
 #     or curl
 $ curl -sSL https://github.com/postfixadmin/postfixadmin/archive/master.tar.gz | tar zxf - --strip-component 1 -C data/postadmin
 
+# copy default config file for PostfixAdmin
+$ cp data/config.inc.php data/postadmin/
+
 # initialize database
 $ docker-compose up -d mysql
 # wait a moment, let MySQL work
@@ -74,7 +77,7 @@ $ docker-compose up -d nginx php mysql
 1. Open `setup.php` in browser, say, `http://1.2.3.4:20007/setup.php`
 2. Follow the instruction to
    1. Setup a **setup password**
-   2. Modify `data/config.inc.php` for your setup password
+   2. Modify `data/postadmin/config.inc.php` for your setup password
    3. Create an administrator account
 3. Open `index.php` and configure your mailboxes
 
