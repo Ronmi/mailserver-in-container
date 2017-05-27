@@ -18,6 +18,8 @@ RUN addgroup --gid 5000 vmail \
             --disabled-login --disabled-password --gecos ,,,,, \
 	    vmail
 
+RUN mkdir /run/fetchmail ; chown vmail:vmail /run/fetchmail
+
 ADD postfix /etc/postfix/
 ADD fetchmail /etc/cron.d/
 
