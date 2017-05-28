@@ -21,7 +21,7 @@ It is designed for personal or small business only.
 ### Cons
 
 - Still needs lots learning to keep things running well (tuning configurations in particular)
-- A few tasks need to be manually executed.
+- You'll need to execute few tasks manually.
 - Fat and furious; Higher risk about 0-day attack.
 
 # Howto
@@ -72,7 +72,7 @@ or
 
 ### Obtain one using Certbot
 
-Below are steps using `WEBROOT` method. You can find more information about Certbot on internet.
+Below are steps using `WEBROOT` method. You can find more information about Certbot on the internet.
 
 First, you should modify the `docker-compose.yml` for exposing NGINX at port 80, or set a reverse proxy in front of it.
 
@@ -89,9 +89,9 @@ $ ln -s live/mail/privkey.pem mail.key
 
 ### Install PostfixAdmin
 
-By default, the web service is exported at port 20007 without SSL. **You should make some protections** (eg: add firewall rules) before configuring PostfixAdmin.
+By default, the web service is exported at port 20007 without SSL. **You should make some protections** (e.g., add firewall rules) before configuring PostfixAdmin.
 
-First grab newest PostfixAdmin codes
+First, grab newest PostfixAdmin codes
 
 ```sh
 # grab newest PostfixAdmin code
