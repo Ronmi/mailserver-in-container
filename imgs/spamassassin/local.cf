@@ -1,9 +1,9 @@
-rewrite_header Subject *****SPAM*****
+#rewrite_header Subject *****SPAM*****
 
 #   Save spam messages as a message/rfc822 MIME attachment instead of
 #   modifying the original message (0: off, 2: use text/plain instead)
 #
-report_safe 1
+report_safe 0
 
 
 #   Set which networks or hosts are considered 'trusted' by your mail
@@ -35,9 +35,9 @@ bayes_auto_learn 1
 #   Set headers which may provide inappropriate cues to the Bayesian
 #   classifier
 #
-# bayes_ignore_header X-Bogosity
-# bayes_ignore_header X-Spam-Flag
-# bayes_ignore_header X-Spam-Status
+bayes_ignore_header X-Bogosity
+bayes_ignore_header X-Spam-Flag
+bayes_ignore_header X-Spam-Status
 
 
 #   Some shortcircuiting, if the plugin is enabled
@@ -71,6 +71,10 @@ ifplugin Mail::SpamAssassin::Plugin::Shortcircuit
 
 endif # Mail::SpamAssassin::Plugin::Shortcircuit
 
-bayes_path /var/lib/spamassassin/bayes.db
-bayes_file_mode 0777
+
+skip_rbl_checks         1
+skip_uribl_checks       1
+
+#bayes_path /var/lib/spamassassin/bayes.db
+#bayes_file_mode 0777
 pyzor_options --homedir /var/lib/spamassassin/pyzor

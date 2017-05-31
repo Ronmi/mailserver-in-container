@@ -2,7 +2,8 @@ FROM ronmi/ynit-image
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-        dovecot-antispam dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d \
+        dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d \
+        dovecot-sieve spamc \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/* \
  && ln -sf /etc/init.d/dovecot /etc/ynit/
@@ -14,5 +15,10 @@ RUN addgroup --gid 5000 vmail \
 
 ADD dovecot /etc/dovecot/
 RUN echo 'postmaster_address = root@localhost' | tee -a /etc/dovecot/dovecot.conf
+
+ADD sieve /usr/lib/dovecot/sieve/
+RUN sievec /usr/lib/dovecot/sieve/report-spam.sieve \
+ && sievec /usr/lib/dovecot/sieve/report-ham.sieve \
+ && chown -R vmail:vmail /etc/sieve
  
 CMD ["ynit", "-unix", "/dev/log"]
