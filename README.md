@@ -143,7 +143,9 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
 - Edit `docker-compose.yml` and/or firewall rules, do not expose the PostfixAdmin ui to public.
 - If you have to expose it, https will always be a good idea.
 - I am not an expert at this domain. It would be nice if willing to provide better configuration options via issue.
-- Never forget applying security update. A simple command do the magic for you: `docker-compose pull && docker-compose build --pull && docker-compose up -d`
+- Never forget applying security update. A simple command do the magic for you:
+  * `docker-compose pull && docker-compose build --no-cache --pull && docker-compose up -d` for a complete rebuild (**Suggested**)
+  * `docker-compose pull && docker-compose build --pull && docker-compose up -d` for a faster rebuild (Rely on Docker's official image)
 
 # TODO
 
