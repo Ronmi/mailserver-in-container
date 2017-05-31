@@ -18,7 +18,6 @@ RUN echo 'postmaster_address = root@localhost' | tee -a /etc/dovecot/dovecot.con
 
 ADD sieve /usr/lib/dovecot/sieve/
 RUN sievec /usr/lib/dovecot/sieve/report-spam.sieve \
- && sievec /usr/lib/dovecot/sieve/report-ham.sieve \
- && chown -R vmail:vmail /etc/sieve
+ && sievec /usr/lib/dovecot/sieve/report-ham.sieve
  
 CMD ["ynit", "-unix", "/dev/log"]
