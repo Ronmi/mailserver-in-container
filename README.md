@@ -6,7 +6,10 @@ It is designed for personal or small business only.
 
 - Postfix for sending mail, with SSL/STARTTLS support.
 - Dovecot for receiving mail, with SSL support.
-- SpamAssassin for spam detection, with global bayes filter.
+- SpamAssassin for spam detection, with per-user based bayes filter.
+- Automatically learning for spam detection:
+  * Move mail to `Spam` or `Junk` folder for reporting to SpamAssassin as spam.
+  * Move mail from `Spam` or `Junk` folder for reporting to SpamAssassin as normal mail.
 - Certbot to obtain free SSL certification, with auto-renewal.
 - PostfixAdmin for easier administrating.
 - Webmail-ready (PHP-based), install RainLoop/Roundcube/whatever you want in a jiffy.
@@ -144,7 +147,6 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
 
 # TODO
 
-- [ ] Add a job in cron.daily to run `sa-learn` with user-defined mail folder.
 - [ ] Find a better way for PostfixAdmin installation.
 - [ ] Add instructions for installing a webmail client, maybe RainLoop or Roundcube.
 
