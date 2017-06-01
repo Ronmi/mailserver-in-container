@@ -16,7 +16,7 @@ It is designed for personal or small business only.
 
 ### Pros
 
-- **Relatively easy** to install: less than 15 mins with fast internet connection.
+- **Relatively easy** to install: less than 5 mins with fast internet connection. (using installation script)
 - Easy to backup and migrate: just stop the whole service and `sudo tar` it. (need root privilege for preserving owner info)
 - Easy to configure: using PostfixAdmin to provide web-based administration.
 - Build on top of Debian: applying security updates only costs you one line of code; Better stability (comparing with Ubuntu)
@@ -24,8 +24,8 @@ It is designed for personal or small business only.
 ### Cons
 
 - Still needs lots learning to keep things running well (tuning configurations in particular)
-- You'll need to execute few tasks manually.
-- Fat and furious; Higher risk about 0-day attack.
+- You'll need to execute few tasks manually, obtain your SSL certifiacte for example.
+- Fat and furious; Higher risk about 0-day attack (Debian is not that fast in this domain).
 
 # Howto
 
@@ -45,35 +45,22 @@ _submission._tcp $TTL IN SRV 0 0 587 mail
 
 It's not necessary to use `mail.your.domain` like above. You can freely choose better name for your mail server, or even use `@`.
 
-## Setup mail server with docker
+## Prepare your SSL certificate
 
-You'll have to get `docker` and `docker-compose` installed first.
-
-### Prepare environment
-
-```sh
-# initialize database
-$ docker-compose up -d mysql
-# wait a moment, let MySQL work
-# create necessary database structure
-$ docker-compose exec mysql prepare_db.sh
-
-# update maildir owner
-$ sudo chown -R 5000:5000 data/mail
-```
-
-**Optional:**, you can install PHP-based application (like webmail) in `data/webmail`
+The Postfix and Dovecot are preconfigured to use SSL/TLS only, you have to obtain a certificate for it.
 
 ### Copy you SSL certificate/key
+
+Buy/apply one from somewhere (maybe your domain name seller?), then
 
 ```sh
 cp /path/to/your/fullchain.pem data/cert/mail.pem
 cp /path/to/your/privatekey.pem data/cert/mail.key
 ```
 
-or
+**or**
 
-### Obtain one using Certbot
+### Obtain one free with Certbot
 
 Below are steps using `WEBROOT` method. You can find more information about Certbot on the internet.
 
@@ -89,6 +76,27 @@ $ cd data/cert
 $ ln -s live/mail/fullchain.pem mail.pem
 $ ln -s live/mail/privkey.pem mail.key
 ```
+
+## Setup mail server with docker
+
+You'll have to get `docker` and `docker-compose` installed first.
+
+Following is manual setup method. If you are quite familiar with this, you might want to run `./install.sh` for a faster installation.
+
+### Prepare environment
+
+```sh
+# initialize database
+$ docker-compose up -d mysql
+# wait a moment, let MySQL work
+# create necessary database structure
+$ docker-compose exec mysql prepare_db.sh
+
+# update maildir owner
+$ sudo chown -R 5000:5000 data/mail
+```
+
+**Optional:**, you can install PHP-based application (like webmail) in `data/webmail`
 
 ### Install PostfixAdmin
 
