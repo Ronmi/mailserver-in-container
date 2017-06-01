@@ -12,4 +12,4 @@ if environment :matches "imap.user" "*" {
   set "username" "${1}";
 }
 
-pipe :copy "/usr/bin/spamc" [ "-d", "spamassassin", "-p", "9000", "-L", "ham", "-u", "${username}" ];
+pipe :copy "spamc.sh" [ "-L", "ham", "-u", "${username}" ];
