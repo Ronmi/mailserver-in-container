@@ -16,7 +16,7 @@ It is designed for personal or small business only.
 
 ### Pros
 
-- **Relatively easy** to install: less than 5 mins with fast internet connection. (using installation script)
+- **Relatively easy** to install: less than 5 mins with fast internet connection. ([using installation script](INSTALL_SCRIPT.md))
 - Easy to backup and migrate: just stop the whole service and `sudo tar` it. (need root privilege for preserving owner info)
 - Easy to configure: using PostfixAdmin to provide web-based administration.
 - Build on top of Debian: applying security updates only costs you one line of code; Better stability (comparing with Ubuntu)
@@ -81,7 +81,7 @@ $ ln -s live/mail/privkey.pem mail.key
 
 You'll have to get `docker` and `docker-compose` installed first.
 
-Following is manual setup method. If you are quite familiar with this, you might want to run `./install.sh` for a faster installation.
+Following is manual setup method. If you are quite familiar with this, you might want to [run `./install.sh` for a faster installation](INSTALL_SCRIPT.md).
 
 ### Prepare environment
 
