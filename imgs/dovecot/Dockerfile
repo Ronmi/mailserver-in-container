@@ -17,6 +17,7 @@ ADD dovecot /etc/dovecot/
 RUN echo 'postmaster_address = root@localhost' | tee -a /etc/dovecot/dovecot.conf
 
 ADD sieve /usr/lib/dovecot/sieve/
+ADD sieve-pipe /usr/lib/dovecot/sieve-pipe/
 RUN sievec /usr/lib/dovecot/sieve/report-spam.sieve \
  && sievec /usr/lib/dovecot/sieve/report-ham.sieve
  
