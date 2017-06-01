@@ -155,11 +155,6 @@ Now your mail server should be well-configured. It's up to you to edit `docker-c
   * `docker-compose pull && docker-compose build --no-cache --pull && docker-compose up -d` for a complete rebuild (**Suggested**)
   * `docker-compose pull && docker-compose build --pull && docker-compose up -d` for a faster rebuild (Rely on Docker's official image)
 
-# TODO
-
-- [ ] Find a better way for PostfixAdmin installation.
-- [ ] Add instructions for installing a webmail client, maybe RainLoop or Roundcube.
-
 # LICENSE
 
 MIT
