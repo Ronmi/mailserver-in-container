@@ -24,7 +24,7 @@ It is designed for personal or small business only.
 ### Cons
 
 - Still needs lots learning to keep things running well (tuning configurations in particular)
-- You'll need to execute few tasks manually, obtain your SSL certifiacte for example.
+- You'll need to execute few tasks manually, obtain your SSL certification for example.
 - Fat and furious; Higher risk about 0-day attack (Debian is not that fast in this domain).
 
 # Howto
@@ -45,11 +45,11 @@ _submission._tcp $TTL IN SRV 0 0 587 mail
 
 It's not necessary to use `mail.your.domain` like above. You can freely choose better name for your mail server, or even use `@`.
 
-## Prepare your SSL certificate
+## Prepare your SSL certification
 
-The Postfix and Dovecot are preconfigured to use SSL/TLS only, you have to obtain a certificate for it.
+The Postfix and Dovecot are preconfigured to use SSL/TLS only, you have to obtain a certification for it.
 
-### Copy you SSL certificate/key
+### Copy you SSL certification/key
 
 Buy/apply one from somewhere (maybe your domain name seller?), then
 
