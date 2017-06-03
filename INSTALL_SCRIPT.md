@@ -76,6 +76,33 @@ RainLoop provides a defult administrator account `admin`/`12345`, which is **VER
 
 Navigate to `http://mail.your.domain/?admin` to change password **IMMEDIATELY**!!!
 
+### Tip about adding domains in RainLoop
+
+- IMAP: set server to `dovecot`, port to `993` and using `SSL/TLS`.
+- SMTP: set server to `postfix`, port to `587` and using `STARTTLS`.
+- Don't forget to check the `Use authentication`
+- Setting `White List` and enable `2-Step Verification` is always a good idea for better security.
+
+### Let users change their password
+
+Here's a modified [Rainloop change password plugin](https://github.com/sandrodz/rainloop-change-password-plugin-mysql) (all credits to original author) at `assets/change-password-mysql`, just copy it into RainLoop plugin directory with `cp -r assets/change-password-mysql data/webmail/data/_data_/_default_/plugins/`, and enable it at web ui.
+
+### About attachment size
+
+Since RainLoop is written with PHP, you'll have to modify **BOTH** PHP and NGINX settings. Say you're setting it to around 10M:
+
+- Add `client_max_body_size 10m;` in `data/nginx.conf`.
+- Create `data/php-upload-size.ini` with following contents:
+
+```ini
+upload_max_filesize = 10M
+post_max_size = 10M
+```
+
+- Modify `docker-compose.yml`, add `- "./data/php-upload-size.ini:/usr/local/etc/php/conf.d/php-upload-size.ini"` to `php`'s `volumes`.
+- `docker-compose restart nginx` to restart NGINX container.
+- `docker-compose up -d` to recreate PHP container.
+
 ## Configure PostfixAdmin
 
 1. Navigate to `http://mail.your.domain/_postadmin/setup.php` and create an administrator account.
