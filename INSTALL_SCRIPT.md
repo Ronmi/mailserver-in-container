@@ -106,66 +106,102 @@ Create `dhparam.pem` for NGINX
 $ openssl dhparam -out /etc/nginx/dhparams.pem 2048
 ```
 
-And create a configuration file contains these
+I'd like to limit access to admin panels frm only trusted ips. Here's the configuration:
 
 ```nginx
 server {
     server_name mail.* smtp.* imap.*;
     listen 80;
 
+	# this is for Certbot
     location /.well-known/ {
         proxy_pass http://127.0.0.1:20007;
         include proxy_params;
     }
 
     location /_postadmin/ {
+        # allow accessing from 127.0.0.1
         allow 127.0.0.1;
         deny all;
+
         proxy_pass http://127.0.0.1:20007;
         include proxy_params;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
     }
 
     location / {
-        return 301 https://$host$uri;
+        # complex setting for RainLoop
+        # 1. no limit for trusted ip
+        # 2. return 404 for admin panel
+        # 3. redirect other requests to HTTPS
+        set $disallow 0;
+        set $redir 1;
+        if ($request ~* admin) {
+            set $disallow 1;
+        }
+        # trust 127.0.0.1
+        if ($remote_addr = "127.0.0.1")
+            set $disallow 0;
+            set $redir 0;
+        }
+        if ($redir) {
+            return 301 https://$host$uri;
+        }
+        if ($disallow) {
+            return 404;
+        }
+
+        proxy_pass http://127.0.0.1:20007;
+        include proxy_params;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
     }
 }
 
 server {
     server_name mail.* smtp.* imap.*;
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    
-    keepalive_timeout 70;
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers "ECDHE+CHACHA20:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE+AES256+SHA384:ECDHE+AES256+SHA:EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
-    ssl_prefer_server_ciphers on;
-    ssl_ecdh_curve secp384r1;
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m;
-    ssl_dhparam /path/to/dhparams.pem;
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    resolver 106.187.95.5 106.186.116.5 106.186.123.5 106.186.124.5 106.187.90.5 106.187.93.5 106.187.94.5 106.187.34.20 106.187.35.20 106.187.36.20 valid=300s;
-    resolver_timeout 5s;
-    add_header Strict-Transport-Security "max-age=63072000; preload";
-    add_header X-Frame-Options DENY;
-    add_header X-Content-Type-Options nosniff;
-    ssl_certificate /path/to/mail.pem;
-    ssl_certificate_key /path/to/mail.key;
+    include ssl_params;
+    ssl_certificate /home/ronmi/docker/mail/data/cert/mail.pem;
+    ssl_certificate_key /home/ronmi/docker/mail/data/cert/mail.key;
 
     location /_postadmin/ {
+        # allow accessing from 127.0.0.1
         allow 127.0.0.1;
         deny all;
+
         proxy_pass http://127.0.0.1:20007;
         include proxy_params;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
     }
     
     location / {
+        # complex setting for RainLoop
+        # 1. no limit for trusted ip
+        # 2. return 404 for admin panel
+        set $disallow 0;
+        if ($request ~* admin) {
+            set $disallow 1;
+        }
+        # trust 127.0.0.1
+        if ($remote_addr = "127.0.0.1")
+            set $disallow 0;
+        }
+        if ($disallow) {
+            return 404;
+        }
+
         proxy_pass http://127.0.0.1:20007;
         include proxy_params;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
     }
 }
-
 ```
 
 Wish you a secured mail server.
