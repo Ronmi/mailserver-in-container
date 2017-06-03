@@ -40,6 +40,8 @@ You'll be asked for few questions for authenticating
 Then, link the key and cert.
 
 ```sh
+# *MUST* enter data/cert before linking
+$ cd data/cert
 $ ln -s live/mail/fullchain.pem mail.pem
 $ ln -s live/mail/privkey.pem mail.key
 ```
@@ -54,7 +56,7 @@ PostfixAdmin needs your password to be:
 * At least 3 characters.
 * At least 2 digits.
 
-You have to manually edit the `data/config.inc.php` to loosen/tighten this restriction before running install script.
+You have to manually edit the `data/config.inc.php` to loosen/tighten these restrictions before running install script.
 
 After deciding your setup_password, run `install.sh` with it:
 
@@ -106,7 +108,7 @@ Create `dhparam.pem` for NGINX
 $ openssl dhparam -out /etc/nginx/dhparams.pem 2048
 ```
 
-I'd like to limit access to admin panels frm only trusted ips. Here's the configuration:
+I'd like to limit access to admin panels from only trusted IP. Here's the configuration:
 
 ```nginx
 server {
