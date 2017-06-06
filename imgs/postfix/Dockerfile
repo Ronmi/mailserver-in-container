@@ -17,6 +17,7 @@ RUN addgroup --gid 5000 vmail \
 ADD postfix /etc/postfix/
 ADD dump.sh /etc/ynit/
 ADD dump.conf /etc/rsyslog.d/
+ADD jail.conf /etc/fail2ban/jail.d/postfix.conf
 RUN ln -sf /etc/init.d/postfix /etc/init.d/rsyslog /etc/init.d/fail2ban /etc/ynit/
 
 CMD ["ynit"]

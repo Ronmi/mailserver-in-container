@@ -8,7 +8,6 @@
 # Non-Stop:       yes
 ### END INIT INFO
 
-touch /var/log/auth.log
 rm -f /run/dump
 mkfifo /run/dump
 cat /run/dump
