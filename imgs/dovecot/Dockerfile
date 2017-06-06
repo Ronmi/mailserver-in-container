@@ -25,7 +25,7 @@ RUN sievec /usr/lib/dovecot/sieve/report-spam.sieve \
 
 ADD dump.sh /etc/ynit/
 ADD dump.conf /etc/rsyslog.d/
-ADD jail.conf /etc/fail2ban/jail.d/dovecot.conf
+ADD jail.conf /etc/fail2ban/jail.d/defaults-debian.conf
 RUN ln -sf /etc/init.d/dovecot /etc/init.d/rsyslog /etc/init.d/fail2ban /etc/ynit/
 
 CMD ["ynit"]
