@@ -7,8 +7,7 @@ RUN apt-get update \
         postfix-cdb postfix-mysql postfix-pcre postfix \
 	spamc rsyslog iptables fail2ban \
  && apt-get clean -y \
- && rm -fr /var/lib/apt/lists/* \
- && ln -sf /etc/init.d/postfix /etc/init.d/rsyslog /etc/init.d/fail2ban /etc/ynit/
+ && rm -fr /var/lib/apt/lists/*
  
 RUN addgroup --gid 5000 vmail \
  && adduser --home /home/vmail --no-create-home --uid 5000 --gid 5000 \
@@ -18,5 +17,6 @@ RUN addgroup --gid 5000 vmail \
 ADD postfix /etc/postfix/
 ADD dump.sh /etc/ynit/
 ADD dump.conf /etc/rsyslog.d/
+RUN ln -sf /etc/init.d/postfix /etc/init.d/rsyslog /etc/init.d/fail2ban /etc/ynit/
 
 CMD ["ynit"]
