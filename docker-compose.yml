@@ -24,6 +24,8 @@ services:
       - ./data/cert:/cert
       - ./data/mail:/home/vmail
       - ./data/postfix:/var/spool/postfix
+    cap_add:
+      - NET_ADMIN
   dovecot:
     build:
       context: ./imgs/dovecot
@@ -37,6 +39,8 @@ services:
     volumes:
       - ./data/cert:/cert
       - ./data/mail:/home/vmail
+    cap_add:
+      - NET_ADMIN
   spamassassin:
     build:
       context: ./imgs/spamassassin

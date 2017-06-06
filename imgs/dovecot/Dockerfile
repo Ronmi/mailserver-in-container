@@ -2,11 +2,11 @@ FROM ronmi/ynit-image:stretch
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-        dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d \
-        dovecot-sieve spamc \
+        dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-pop3d dovecot-sieve \
+	spamc rsyslog iptables fail2ban \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/* \
- && ln -sf /etc/init.d/dovecot /etc/ynit/
+ && ln -sf /etc/init.d/dovecot /etc/init.d/rsyslogd /etc/init.d/fail2ban /etc/ynit/
 
 RUN addgroup --gid 5000 vmail \
  && adduser --home /home/vmail --no-create-home --uid 5000 --gid 5000 \
@@ -20,5 +20,8 @@ ADD sieve /usr/lib/dovecot/sieve/
 ADD sieve-pipe /usr/lib/dovecot/sieve-pipe/
 RUN sievec /usr/lib/dovecot/sieve/report-spam.sieve \
  && sievec /usr/lib/dovecot/sieve/report-ham.sieve
+
+ADD dump.sh /etc/ynit/
+ADD dump.conf /etc/rsyslog.d/
  
-CMD ["ynit", "-unix", "/dev/log"]
+CMD ["ynit"]
