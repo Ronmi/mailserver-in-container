@@ -6,7 +6,7 @@ RUN apt-get update \
 	spamc rsyslog iptables fail2ban \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/* \
- && ln -sf /etc/init.d/dovecot /etc/init.d/rsyslogd /etc/init.d/fail2ban /etc/ynit/
+ && ln -sf /etc/init.d/dovecot /etc/init.d/rsyslog /etc/init.d/fail2ban /etc/ynit/
 
 RUN addgroup --gid 5000 vmail \
  && adduser --home /home/vmail --no-create-home --uid 5000 --gid 5000 \

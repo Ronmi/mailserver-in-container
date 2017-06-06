@@ -19,4 +19,4 @@ ADD postfix /etc/postfix/
 ADD dump.sh /etc/ynit/
 ADD dump.conf /etc/rsyslog.d/
 
-CMD ["ynit", "-unix", "/dev/log"]
+CMD ["ynit"]
