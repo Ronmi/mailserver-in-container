@@ -9,6 +9,9 @@ RUN apt-get update \
  && apt-get clean -y \
  && rm -fr /var/lib/apt/lists/*
  
+# make fail2ban runs after postfix
+RUN sed -i 's/# Required-Start:.*/# Required-Start: postfix/' /etc/init.d/fail2ban
+
 RUN addgroup --gid 5000 vmail \
  && adduser --home /home/vmail --no-create-home --uid 5000 --gid 5000 \
             --disabled-login --disabled-password --gecos ,,,,, \
