@@ -2,7 +2,7 @@ You can create your own mail server in a jiffy.
 
 # What's inside
 
-* Preconfigured Postfix/Dovecot/SpamAssassin.
+* Preconfigured Postfix/Dovecot/SpamAssassin/Fail2ban.
 * Move mail from/to **Spam** folder to train bayers filter.
 * Manage domains and mailboxes from web by PostfixAdmin.
 * A webmail system powered by RainLoop community edition.

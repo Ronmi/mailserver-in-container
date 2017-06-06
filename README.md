@@ -4,6 +4,7 @@ It is designed for personal or small business only.
 
 # What's inside
 
+- Fail2ban to lower risk of being attacked.
 - Postfix for sending mail, with SSL/STARTTLS support.
 - Dovecot for receiving mail, with SSL support.
 - SpamAssassin for spam detection, with per-user based bayes filter.
