@@ -9,11 +9,14 @@
 ### END INIT INFO
 
 # this is for fail2ban
-if [[ ! -f /var/log/mail.warn ]]
-then
-    touch /var/log/mail.warn
-    chown root:adm /var/log/mail.warn
-fi
+for i in $(grep -F var/log/mail /etc/rsyslog.conf | awk '{print $2}' | sed -E 's/^-//')
+do
+    if [[ ! -f "$i" ]]
+    then
+	touch "$i"
+	chown root:adm "$i"
+    fi
+done
 
 rm -f /run/dump
 mkfifo /run/dump
