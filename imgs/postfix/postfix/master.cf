@@ -1,8 +1,7 @@
 smtp      inet   n       -       -       -       -       smtpd
   -o content_filter=spamassassin
   -o syslog_name=postfix/smtp
-  -o smtpd_reject_unlisted_recipient=no
-  -o smtpd_relay_restrictions=permit_auth_destination,reject
+  -o smtpd_relay_restrictions=reject_sender_login_mismatch,permit_sasl_authenticated,check_sender_access proxy:mysql:$config_directory/reject_fake_relay.cf,permit
   -o milter_macro_daemon_name=ORIGINATING
 #smtp      inet  n       -       -       -       1       postscreen
 #smtpd     pass  -       -       -       -       -       smtpd
@@ -12,7 +11,6 @@ submission inet  n       -       -       -       -       smtpd
   -o syslog_name=postfix/submission
   -o smtpd_tls_security_level=encrypt
   -o smtpd_sasl_auth_enable=yes
-  -o smtpd_reject_unlisted_recipient=no
   -o smtpd_sender_restrictions=permit_sasl_authenticated,reject
   -o smtpd_recipient_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
   -o smtpd_relay_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
@@ -21,10 +19,9 @@ smtps     inet   n       -       -       -       -       smtpd
   -o syslog_name=postfix/smtps
   -o smtpd_tls_wrappermode=yes
   -o smtpd_sasl_auth_enable=yes
-  -o smtpd_reject_unlisted_recipient=no
   -o smtpd_sender_restrictions=permit_sasl_authenticated,reject
   -o smtpd_recipient_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
-  -o smtpd_relay_restrictions=permit_sasl_authenticated,permit_auth_destination,reject
+  -o smtpd_relay_restrictions=reject_sender_login_mismatch,permit_sasl_authenticated,check_sender_access proxy:mysql:$config_directory/reject_fake_relay.cf,permit
   -o milter_macro_daemon_name=ORIGINATING
 #628       inet  n       -       -       -       -       qmqpd
 pickup    unix  n       -       -       60      1       pickup
