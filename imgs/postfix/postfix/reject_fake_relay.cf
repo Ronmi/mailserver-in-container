@@ -1,5 +1,5 @@
 user = root
 password = secretpassword
 hosts = mysql
-table = domain
+dbname = mail
 query = select 'Reject 530 SMTP authentication is required' from domain where domain = '%d'
