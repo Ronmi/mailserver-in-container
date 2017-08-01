@@ -57,3 +57,9 @@ smtpd_sasl_path = inet:dovecot:9001
 
 message_size_limit = 51200000
 compatibility_level = 2
+
+smtpd_relay_restrictions =
+   reject_sender_login_mismatch,
+   permit_sasl_authenticated,
+   check_sender_access proxy:mysql:/etc/postfix/reject_fake_relay.cf,
+   permit
