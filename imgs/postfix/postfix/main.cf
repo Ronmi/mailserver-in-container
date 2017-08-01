@@ -56,3 +56,4 @@ smtpd_sasl_type = dovecot
 smtpd_sasl_path = inet:dovecot:9001
 
 message_size_limit = 51200000
+compatibility_level = 2

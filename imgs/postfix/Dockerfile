@@ -21,6 +21,7 @@ ADD postfix /etc/postfix/
 ADD dump.sh /etc/ynit/
 ADD dump.conf /etc/rsyslog.d/
 ADD jail.conf /etc/fail2ban/jail.d/defaults-debian.conf
+ADD upgrade.sh /
 RUN ln -sf /etc/init.d/postfix /etc/init.d/rsyslog /etc/init.d/fail2ban /etc/ynit/
 
 CMD ["ynit"]
