@@ -2,6 +2,11 @@
 
 It is designed for personal or small business only.
 
+# Upgrade from previous version (Debian jessie/Postfix 2.11)
+
+- Rebuild all containers with new Debian image `docker-compose build --pull`
+- Run upgrade script to fix permission problem `docker-compose exec postfix /upgrade.sh`
+
 # What's inside
 
 - Fail2ban to lower risk of being attacked.
