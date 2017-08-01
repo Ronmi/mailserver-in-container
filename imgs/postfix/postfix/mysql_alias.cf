@@ -2,4 +2,4 @@ user = root
 password = secretpassword
 hosts = mysql
 dbname = mail
-query = SELECT goto FROM alias WHERE address='%s' AND active=1
+query = SELECT goto FROM alias WHERE address='%s' AND active=1 UNION SELECT CONCAT(SUBSTRING(u, 1, LOCATE('.', u)-1), '+', SUBSTRING(u FROM LOCATE('.', u)+1), '@', d) FROM (SELECT SUBSTRING('%s', 1, LOCATE('@', '%s')-1) as u, SUBSTRING('%s' FROM LOCATE('@', '%s')+1) AS d FROM domain WHERE domain='%d' AND '%s' REGEXP '^[^.@]+[.][^.@]+@.+$') AS t
