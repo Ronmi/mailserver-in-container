@@ -19,7 +19,7 @@ lock_method flock
 
 #   Set the threshold at which a message is considered spam (default: 5.0)
 #
-required_score 3.0
+required_score 5.0
 
 
 #   Use Bayesian classifier (default: 1)
